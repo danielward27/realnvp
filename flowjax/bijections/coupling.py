@@ -8,6 +8,7 @@ from collections.abc import Callable
 import equinox as eqx
 import jax.nn as jnn
 import jax.numpy as jnp
+import jax
 import paramax
 from jaxtyping import PRNGKeyArray
 
@@ -121,3 +122,46 @@ class Coupling(AbstractBijection):
         transformer_params = jnp.reshape(params, (dim, -1))
         transformer = eqx.filter_vmap(self.transformer_constructor)(transformer_params)
         return Vmap(transformer, in_axes=eqx.if_array(0))
+
+    def inverse_gradient_and_val(
+        self,
+        y: Array,
+        y_grad: Array,
+        y_logp: Array,
+        condition: Array | None = None,
+    ) -> tuple[Array, Array, Array]:
+        y_cond, y_trans = y[: self.untransformed_dim], y[self.untransformed_dim :]
+        x_cond = y_cond
+
+        y_grad_cond, y_grad_trans = (
+            y_grad[: self.untransformed_dim],
+            y_grad[self.untransformed_dim :],
+        )
+
+        def conditioner(x_cond):
+            nn_input = (
+                x_cond if condition is None else jnp.concatenate((x_cond, condition))
+            )
+            return self.conditioner(nn_input)
+
+        transformer_params, nn_pull = jax.vjp(conditioner, x_cond)
+
+        def pull_transformer_grad(transformer_params):
+            transformer = self._flat_params_to_transformer(transformer_params)
+
+            x_trans, x_grad_trans, x_logp = transformer.inverse_gradient_and_val(
+                y_trans, y_grad_trans, y_logp
+            )
+
+            return (x_logp, x_trans), x_grad_trans
+
+        ((x_logp, x_trans), pull_pull_transformer_grad, x_grad_trans) = jax.vjp(
+            pull_transformer_grad, transformer_params, has_aux=True
+        )
+
+        (co_transformer_params,) = pull_pull_transformer_grad((1.0, -x_grad_trans))
+        (co_x_cond,) = nn_pull(co_transformer_params)
+
+        x = jnp.hstack((x_cond, x_trans))
+        x_grad = jnp.hstack((y_grad_cond + co_x_cond, x_grad_trans))
+        return x, x_grad, x_logp

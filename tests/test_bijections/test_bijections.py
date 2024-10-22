@@ -1,4 +1,5 @@
 "General tests for bijections (including transformers)."
+
 from abc import abstractmethod
 
 import equinox as eqx
@@ -6,6 +7,8 @@ import jax
 import jax.numpy as jnp
 import jax.random as jr
 import pytest
+import numpy as np
+from scipy import stats
 
 from flowjax.bijections import (
     AbstractBijection,
@@ -276,6 +279,90 @@ def test_transform_inverse_and_log_dets(constructor):
         pass
 
 
+@pytest.mark.parametrize("bijection_name", bijections.keys())
+def test_inverse_gradient_and_val(bijection_name):
+    bijection = bijections[bijection_name]()
+    shape = bijection.shape if bijection.shape is not None else (DIM,)
+    y = jr.normal(jr.PRNGKey(0), shape)
+
+    if type(bijection) in POSITIVE_DOMAIN:
+        y = jnp.abs(y)
+
+    if bijection.cond_shape is not None:
+        cond = jr.normal(jr.PRNGKey(0), bijection.cond_shape)
+    else:
+        cond = None
+
+    y_grad = -y
+    y_logp = jnp.array(jax.scipy.stats.norm.logpdf(y).sum())
+
+    try:
+        x, x_grad, x_logp = AbstractBijection.inverse_gradient_and_val(
+            bijection,
+            y,
+            y_grad,
+            y_logp,
+            cond,
+        )
+
+        x_actual, x_grad_actual, x_logp_actual = bijection.inverse_gradient_and_val(
+            y, y_grad, y_logp, cond
+        )
+
+        np.testing.assert_allclose(x, x_actual)
+        np.testing.assert_allclose(x_grad, x_grad_actual)
+        np.testing.assert_allclose(x_logp, x_logp_actual)
+    except NotImplementedError:
+        pass
+
+
+def test_affine_inverse_gradient_and_val():
+    affine = Affine(scale=3.0, loc=1.0)
+
+    rng = np.random.default_rng(0)
+    x = jnp.array(rng.normal())
+
+    x_grad = -x
+    x_logp = jnp.array(stats.norm(scale=1, loc=0).logpdf(x))
+
+    y = affine.transform(x)
+    y_logp = jnp.array(stats.norm(scale=3, loc=1).logpdf(y))
+    y_grad = -(y - 1) / 9
+
+    expected = np.array([x, x_grad, x_logp])
+    actual = np.array(
+        affine.inverse_gradient_and_val(jnp.array(y), jnp.array(y_grad), y_logp)
+    )
+    np.testing.assert_allclose(expected, actual, rtol=1e-6)
+
+
+def test_exp_inverse_gradient_and_val():
+    exp = Exp()
+
+    rng = np.random.default_rng(0)
+    x = jnp.array(rng.normal())
+
+    x_grad = -x
+    x_logp = jnp.array(stats.norm(scale=1, loc=0).logpdf(x))
+
+    y = exp.transform(x)
+    y_logp = jnp.array(stats.lognorm(s=1, scale=1).logpdf(y))
+
+    # Compute numerical derivative in float64
+    y_f64 = np.array(y)
+    y_grad = jnp.array(
+        (
+            stats.lognorm(s=1, scale=1).logpdf(y_f64 + 1e-8)
+            - stats.lognorm(s=1, scale=1).logpdf(y_f64)
+        )
+        / 1e-8
+    )
+
+    expected = np.array([x, x_grad, x_logp])
+    actual = np.array(exp.inverse_gradient_and_val(y, y_grad, y_logp))
+    np.testing.assert_allclose(expected, actual, rtol=1e-6)
+
+
 class _AstractTestBijection(AbstractBijection):
     shape: tuple[int, ...] = ()
     cond_shape: tuple[int, ...] | None = None
@@ -293,6 +380,9 @@ class _AstractTestBijection(AbstractBijection):
     @abstractmethod
     def inverse_and_log_det(self, y, condition=None):
         return y, jnp.zeros(())
+
+    def inverse_gradient_and_val(self, y, y_grad, y_logp, condition=None):
+        return y, y_grad, jnp.zeros(())
 
 
 class _TestBijection(_AstractTestBijection):
