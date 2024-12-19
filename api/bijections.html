@@ -1,0 +1,1260 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bijections &#8212; FlowJAX</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=3d3fbe02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=a31e0150" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/bijections';</script>
+    <link rel="icon" href="../_static/icon.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flows" href="flows.html" />
+    <link rel="prev" title="Distributions" href="distributions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_light.svg" class="logo__image only-light" alt="FlowJAX - Home"/>
+    <img src="../_static/logo_dark.svg" class="logo__image only-dark pst-js-only" alt="FlowJAX - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    FlowJAX
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/unconditional.html">Unconditional density estmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/conditional.html">Conditional density estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/variational_inference.html">Variational inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/constrained.html">Flows with constrained support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/snpe.html">Sequential neural posterior estimation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="distributions.html">Distributions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bijections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flows.html">Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training.html">Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="losses.html">Loss functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experimental.html">Experimental numpyro interface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Miscellaneous</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/danielward27/flowjax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bijections</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection"><code class="docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.inverse"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.inverse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.inverse_and_log_det"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.inverse_and_log_det()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.transform"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.transform()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.transform_and_log_det"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.transform_and_log_det()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AdditiveCondition"><code class="docutils literal notranslate"><span class="pre">AdditiveCondition</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Affine"><code class="docutils literal notranslate"><span class="pre">Affine</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.BlockAutoregressiveNetwork"><code class="docutils literal notranslate"><span class="pre">BlockAutoregressiveNetwork</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Chain"><code class="docutils literal notranslate"><span class="pre">Chain</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Chain.merge_chains"><code class="docutils literal notranslate"><span class="pre">Chain.merge_chains()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Concatenate"><code class="docutils literal notranslate"><span class="pre">Concatenate</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Coupling"><code class="docutils literal notranslate"><span class="pre">Coupling</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.EmbedCondition"><code class="docutils literal notranslate"><span class="pre">EmbedCondition</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Exp"><code class="docutils literal notranslate"><span class="pre">Exp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Flip"><code class="docutils literal notranslate"><span class="pre">Flip</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Identity"><code class="docutils literal notranslate"><span class="pre">Identity</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Indexed"><code class="docutils literal notranslate"><span class="pre">Indexed</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Invert"><code class="docutils literal notranslate"><span class="pre">Invert</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.LeakyTanh"><code class="docutils literal notranslate"><span class="pre">LeakyTanh</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Loc"><code class="docutils literal notranslate"><span class="pre">Loc</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.MaskedAutoregressive"><code class="docutils literal notranslate"><span class="pre">MaskedAutoregressive</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.MaskedAutoregressive.inv_scan_fn"><code class="docutils literal notranslate"><span class="pre">MaskedAutoregressive.inv_scan_fn()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.NumericalInverse"><code class="docutils literal notranslate"><span class="pre">NumericalInverse</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Permute"><code class="docutils literal notranslate"><span class="pre">Permute</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Planar"><code class="docutils literal notranslate"><span class="pre">Planar</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Planar.get_planar"><code class="docutils literal notranslate"><span class="pre">Planar.get_planar()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Power"><code class="docutils literal notranslate"><span class="pre">Power</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.RationalQuadraticSpline"><code class="docutils literal notranslate"><span class="pre">RationalQuadraticSpline</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.RationalQuadraticSpline.derivative"><code class="docutils literal notranslate"><span class="pre">RationalQuadraticSpline.derivative()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Reshape"><code class="docutils literal notranslate"><span class="pre">Reshape</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Scale"><code class="docutils literal notranslate"><span class="pre">Scale</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Scan"><code class="docutils literal notranslate"><span class="pre">Scan</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Sigmoid"><code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.SoftPlus"><code class="docutils literal notranslate"><span class="pre">SoftPlus</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Stack"><code class="docutils literal notranslate"><span class="pre">Stack</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Tanh"><code class="docutils literal notranslate"><span class="pre">Tanh</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.TriangularAffine"><code class="docutils literal notranslate"><span class="pre">TriangularAffine</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Vmap"><code class="docutils literal notranslate"><span class="pre">Vmap</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="bijections">
+<h1>Bijections<a class="headerlink" href="#bijections" title="Link to this heading">#</a></h1>
+<p>For an introduction to using bijections in FlowJAX, see <a class="reference internal" href="../getting_started.html"><span class="std std-ref">Getting started</span></a>.</p>
+<p id="module-flowjax.bijections">Bijections from <code class="docutils literal notranslate"><span class="pre">flowjax.bijections</span></code>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.AbstractBijection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractBijection</span></span><a class="reference internal" href="../_modules/flowjax/bijections/bijection.html#AbstractBijection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.AbstractBijection" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Bijection abstract class.</p>
+<p>Similar to <a class="reference internal" href="distributions.html#flowjax.distributions.AbstractDistribution" title="flowjax.distributions.AbstractDistribution"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractDistribution</span></code></a>, bijections have
+a <code class="docutils literal notranslate"><span class="pre">shape</span></code> and a <code class="docutils literal notranslate"><span class="pre">cond_shape</span></code> attribute. To allow easy composing of bijections,
+all bijections support passing of conditioning variables (even if ignored).</p>
+<p>Bijections are registered as Jax PyTrees (as they are equinox modules), so are
+compatible with normal JAX operations. The methods of bijections do not support
+passing of additional batch dimensions, however, <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code> or <code class="docutils literal notranslate"><span class="pre">eqx.filter_vmap</span></code>
+can be used to vmap specific methods if desired, and a bijection can be explicitly
+vectorised using the <a class="reference internal" href="#flowjax.bijections.Vmap" title="flowjax.bijections.jax_transforms.Vmap"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vmap</span></code></a> bijection.</p>
+<p>Implementing a bijection:</p>
+<ul class="simple">
+<li><p>Inherit from <code class="docutils literal notranslate"><span class="pre">AbstractBijection</span></code>.</p></li>
+<li><p>Define the attributes <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">cond_shape</span></code>. A <code class="docutils literal notranslate"><span class="pre">cond_shape</span></code> of
+<code class="docutils literal notranslate"><span class="pre">None</span></code> is used to represent unconditional bijections.</p></li>
+<li><p>Implement the abstract methods, <code class="docutils literal notranslate"><span class="pre">transform_and_log_det</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">inverse_and_log_det</span></code>. These should act on inputs compatible with the shapes
+<code class="docutils literal notranslate"><span class="pre">shape</span></code> for <code class="docutils literal notranslate"><span class="pre">x</span></code>, and <code class="docutils literal notranslate"><span class="pre">cond_shape</span></code> for <code class="docutils literal notranslate"><span class="pre">condition</span></code>.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.AbstractBijection.inverse">
+<span class="sig-name descname"><span class="pre">inverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/bijection.html#AbstractBijection.inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.AbstractBijection.inverse" title="Link to this definition">#</a></dt>
+<dd><p>Compute the inverse transformation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Input array with shape matching bijection.shape</p></li>
+<li><p><strong>condition</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Condition array with shape matching bijection.cond_shape.
+Required for conditional bijections. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.AbstractBijection.inverse_and_log_det">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inverse_and_log_det</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/bijection.html#AbstractBijection.inverse_and_log_det"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.AbstractBijection.inverse_and_log_det" title="Link to this definition">#</a></dt>
+<dd><p>Inverse transformation and corresponding log absolute jacobian determinant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Input array with shape matching bijection.shape.</p></li>
+<li><p><strong>condition</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Condition array with shape matching bijection.cond_shape.
+Required for conditional bijections. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.AbstractBijection.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/bijection.html#AbstractBijection.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.AbstractBijection.transform" title="Link to this definition">#</a></dt>
+<dd><p>Apply the forward transformation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Input with shape matching <code class="docutils literal notranslate"><span class="pre">bijections.shape</span></code>.</p></li>
+<li><p><strong>condition</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Condition, with shape matching <code class="docutils literal notranslate"><span class="pre">bijection.cond_shape</span></code>, required
+for conditional bijections and ignored for unconditional bijections.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.AbstractBijection.transform_and_log_det">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform_and_log_det</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/bijection.html#AbstractBijection.transform_and_log_det"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.AbstractBijection.transform_and_log_det" title="Link to this definition">#</a></dt>
+<dd><p>Apply transformation and compute the log absolute Jacobian determinant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Input with shape matching the bijections shape</p></li>
+<li><p><strong>condition</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – . Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.AdditiveCondition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AdditiveCondition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond_shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/affine.html#AdditiveCondition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.AdditiveCondition" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Given a callable <code class="docutils literal notranslate"><span class="pre">f</span></code>, carries out the transformation <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">f(condition)</span></code>.</p>
+<p>If used to transform a distribution, this allows the “location” to be changed as a
+function of the conditioning variables. Note that the callable can be a callable
+module with trainable parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code>]</span>) – A callable (e.g. a function or callable module) that maps array with
+shape cond_shape, to a shape that is broadcastable with the shape of the
+bijection.</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The shape of the bijection.</p></li>
+<li><p><strong>cond_shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The condition shape of the bijection.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Conditioning using a linear transformation</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flowjax.bijections</span> <span class="kn">import</span> <span class="n">AdditiveCondition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">equinox.nn</span> <span class="kn">import</span> <span class="n">Linear</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.random</span> <span class="k">as</span> <span class="nn">jr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">AdditiveCondition</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">jr</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="n">cond_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,)</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">condition</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">Array([1.9670618, 0.8156546, 1.7763454], dtype=float32)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Affine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Affine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/affine.html#Affine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Affine" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Elementwise affine transformation <span class="math notranslate nohighlight">\(y = a \cdot x + b\)</span>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> should broadcast to the desired shape of the bijection.
+By default, we constrain the scale parameter to be postive using <code class="docutils literal notranslate"><span class="pre">softplus</span></code>, but
+other parameterizations can be achieved by replacing the scale parameter after
+construction e.g. using <code class="docutils literal notranslate"><span class="pre">eqx.tree_at</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loc</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Location parameter. Defaults to 0.</p></li>
+<li><p><strong>scale</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Scale parameter. Defaults to 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.BlockAutoregressiveNetwork">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BlockAutoregressiveNetwork</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">cond_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">block_dim</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/block_autoregressive_network.html#BlockAutoregressiveNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.BlockAutoregressiveNetwork" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Block Autoregressive Network (<a class="reference external" href="https://arxiv.org/abs/1904.04676">https://arxiv.org/abs/1904.04676</a>).</p>
+<p>Note that in contrast to the original paper which uses tanh activations, by default
+we use <span class="math notranslate nohighlight">\(\tanh(x) + 0.01 * x\)</span>. This ensures the image of the
+activation is the set of real values, which ensures the transform maps
+real -&gt; real, avoiding various issues
+(see <a class="github reference external" href="https://github.com/danielward27/flowjax/issues/102">danielward27/flowjax#102</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">PRNGKeyArray</span></code></span>) – Jax key</p></li>
+<li><p><strong>dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Dimension of the distribution.</p></li>
+<li><p><strong>cond_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Dimension of conditioning variables. Defaults to None.</p></li>
+<li><p><strong>depth</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of hidden layers in the network.</p></li>
+<li><p><strong>block_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Block dimension (hidden layer size is <cite>dim*block_dim</cite>).</p></li>
+<li><p><strong>activation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Activation function, either a scalar bijection or a callable that
+computes the activation for a scalar value. Note that the activation should
+be bijective to ensure invertibility of the network and in general should
+map real -&gt; real to ensure that when transforming a distribution (either
+with the forward or inverse), the map is defined across the support of
+the base distribution. Defaults to <span class="math notranslate nohighlight">\(\tanh(x) + 0.01 * x\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Chain">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijections</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/chain.html#Chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Chain" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Compose arbitrary bijections to form another bijection.</p>
+<p>If the layers you are chaining have consistent structure, consider using
+<a class="reference internal" href="#flowjax.bijections.Scan" title="flowjax.bijections.Scan"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scan</span></code></a>, which will avoid seperately compiling each
+layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bijections</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a>, <a class="reference external" href="https://danielward27.github.io/paramax/api/wrappers.html#paramax.wrappers.AbstractUnwrappable" title="(in Paramax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractUnwrappable</span></code></a>[<a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a>]]]</span>) – Sequence of bijections. The bijection shapes must match, and any
+none None condition shapes must match.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.Chain.merge_chains">
+<span class="sig-name descname"><span class="pre">merge_chains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/chain.html#Chain.merge_chains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Chain.merge_chains" title="Link to this definition">#</a></dt>
+<dd><p>Returns an equivilent Chain object, in which nested chains are flattened.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Concatenate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Concatenate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/concatenate.html#Concatenate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Concatenate" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Concatenate bijections along an existing axis, similar to <code class="docutils literal notranslate"><span class="pre">jnp.concatenate</span></code>.</p>
+<p>See also <a class="reference internal" href="#flowjax.bijections.Stack" title="flowjax.bijections.Stack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></a>.</p>
+<p class="rubric">Example</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flowjax.bijections</span> <span class="kn">import</span> <span class="n">Concatenate</span><span class="p">,</span> <span class="n">Affine</span><span class="p">,</span> <span class="n">Exp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concat</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">([</span><span class="n">Affine</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))),</span> <span class="n">Exp</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concat</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4, 3)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bijections</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a>]</span>) – Bijections, to stack into a single bijection.</p></li>
+<li><p><strong>axis</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Axis along which to stack. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Coupling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Coupling</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">transformer</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">untransformed_dim</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">cond_dim=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">nn_width</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">nn_depth</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">nn_activation=&lt;jax._src.custom_derivatives.custom_jvp</span> <span class="pre">object&gt;</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/coupling.html#Coupling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Coupling" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Coupling layer implementation (<a class="reference external" href="https://arxiv.org/abs/1605.08803">https://arxiv.org/abs/1605.08803</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">PRNGKeyArray</span></code></span>) – Jax key</p></li>
+<li><p><strong>transformer</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – Unconditional bijection with shape () to be parameterised by the
+conditioner neural netork. Parameters wrapped with <code class="docutils literal notranslate"><span class="pre">NonTrainable</span></code>
+are excluded from being parameterized.</p></li>
+<li><p><strong>untransformed_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of untransformed conditioning variables (e.g. dim//2).</p></li>
+<li><p><strong>dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Total dimension.</p></li>
+<li><p><strong>cond_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Dimension of additional conditioning variables. Defaults to None.</p></li>
+<li><p><strong>nn_width</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Neural network hidden layer width.</p></li>
+<li><p><strong>nn_depth</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Neural network hidden layer size.</p></li>
+<li><p><strong>nn_activation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Neural network activation function. Defaults to jnn.relu.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.EmbedCondition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EmbedCondition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_net</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_cond_shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#EmbedCondition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.EmbedCondition" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Wrap a bijection to include an embedding network.</p>
+<p>Generally this is used to reduce the dimensionality of the conditioning
+variable. The returned bijection has cond_dim equal to the raw condition size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bijection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – Bijection with <code class="docutils literal notranslate"><span class="pre">bijection.cond_dim</span></code> equal to the embedded size.</p></li>
+<li><p><strong>embedding_net</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – A callable (e.g. equinox module) that embeds a conditioning
+variable to size <code class="docutils literal notranslate"><span class="pre">bijection.cond_dim</span></code>.</p></li>
+<li><p><strong>raw_cond_shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The dimension of the raw conditioning variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Exp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/exp.html#Exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Exp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Elementwise exponential transform (forward) and log transform (inverse).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – Shape of the bijection. Defaults to ().</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Flip">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Flip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#Flip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Flip" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Flip the input array. Condition argument is ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The shape of the bijection. Defaults to None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Identity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#Identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Identity" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>The identity bijection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The shape of the bijection. Defaults to ().</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Indexed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Indexed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#Indexed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Indexed" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Applies bijection to specific indices of an input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bijection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – Bijection that is compatible with the subset of x indexed by idxs.</p></li>
+<li><p><strong>idxs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">slice</span></code></a> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code> | <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span>) – Indices (Integer, a slice, or an ndarray with integer/bool dtype) of the
+transformed portion.</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – Shape of the bijection. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Invert">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Invert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijection</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#Invert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Invert" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Invert a bijection.</p>
+<p>This wraps a bijection, such that the transform methods become the inverse
+methods and vice versa. Note that in general, we define bijections such that
+the forward methods are preffered, i.e. faster/actually implemented. For
+training flows, we generally want the inverse method (used in density
+evaluation), to be faster. Hence it is often useful to use this class to
+achieve this aim.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bijection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – Bijection to invert.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.LeakyTanh">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LeakyTanh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/tanh.html#LeakyTanh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.LeakyTanh" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Tanh bijection, with a linear transformation beyond +/- max_val.</p>
+<p>The value and gradient of the linear segments are set to match tanh at +/- max_val.
+This bijection can be useful to encourage values to be within an interval, whilst
+avoiding numerical precision issues, or in cases we require a real -&gt; real mapping
+so Tanh is not appropriate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_val</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Value above or below which the function becomes linear.</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The shape of the bijection. Defaults to ().</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Loc">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Loc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/affine.html#Loc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Loc" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Location transformation <span class="math notranslate nohighlight">\(y = a \cdot x + b\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>loc</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Scale parameter. Defaults to 1.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.MaskedAutoregressive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaskedAutoregressive</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">transformer</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">cond_dim=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">nn_width</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">nn_depth</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">nn_activation=&lt;jax._src.custom_derivatives.custom_jvp</span> <span class="pre">object&gt;</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/masked_autoregressive.html#MaskedAutoregressive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.MaskedAutoregressive" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Masked autoregressive bijection.</p>
+<p>The transformer is parameterised by a neural network, with weights masked to ensure
+an autoregressive structure.</p>
+<dl class="simple">
+<dt>Refs:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/1705.07057v4">https://arxiv.org/abs/1705.07057v4</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1705.07057v4">https://arxiv.org/abs/1705.07057v4</a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">PRNGKeyArray</span></code></span>) – Jax key</p></li>
+<li><p><strong>transformer</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – Bijection with shape () to be parameterised by the autoregressive
+network. Parameters wrapped with <code class="docutils literal notranslate"><span class="pre">NonTrainable</span></code> are exluded.</p></li>
+<li><p><strong>dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Dimension.</p></li>
+<li><p><strong>cond_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Dimension of any conditioning variables. Defaults to None.</p></li>
+<li><p><strong>nn_width</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Neural network width.</p></li>
+<li><p><strong>nn_depth</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Neural network depth.</p></li>
+<li><p><strong>nn_activation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Neural network activation. Defaults to jnn.relu.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.MaskedAutoregressive.inv_scan_fn">
+<span class="sig-name descname"><span class="pre">inv_scan_fn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/masked_autoregressive.html#MaskedAutoregressive.inv_scan_fn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.MaskedAutoregressive.inv_scan_fn" title="Link to this definition">#</a></dt>
+<dd><p>One ‘step’ in computing the inverse.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.NumericalInverse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NumericalInverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#NumericalInverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.NumericalInverse" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Bijection wrapper to provide inverse methods using e.g. root finding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bijection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – The bijection to add an inverse to.</p></li>
+<li><p><strong>inverter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>], <code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code>]</span>) – Callable implementing the numerical inversion method. Should accept
+the bijection, y and condition as arguments, and return the inverse.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Permute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Permute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permutation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#Permute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Permute" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Permutation transformation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>permutation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Int[Array,</span> <span class="pre">'...']</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Int[ndarray,</span> <span class="pre">'...']</span></code>]</span>) – An array with shape matching the array to transform, with elements
+0-(array.size-1) representing the new order based on the flattened array
+(uses, C-like ordering).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Planar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Planar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negative_slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">mlp_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/planar.html#Planar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Planar" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Planar bijection as used by <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">https://arxiv.org/pdf/1505.05770.pdf</a>.</p>
+<p>Uses the transformation</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{y}=\boldsymbol{x} +
+    \boldsymbol{u} \cdot \text{tanh}(\boldsymbol{w}^T \boldsymbol{x} + b)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{u} \in \mathbb{R}^D, \ \boldsymbol{w} \in \mathbb{R}^D\)</span>
+and <span class="math notranslate nohighlight">\(b \in \mathbb{R}\)</span>. In the unconditional case, the (unbounded) parameters
+are learned directly. In the unconditional case they are parameterised by an MLP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">PRNGKeyArray</span></code></span>) – Jax random key.</p></li>
+<li><p><strong>dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Dimension of the bijection.</p></li>
+<li><p><strong>cond_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Dimension of extra conditioning variables. Defaults to None.</p></li>
+<li><p><strong>negative_slope</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – A positive float. If provided, then a leaky relu activation
+(with the corresponding negative slope) is used instead of tanh. This also
+provides the advantage that the bijection can be inverted analytically.</p></li>
+<li><p><strong>**mlp_kwargs</strong> – Keyword arguments (excluding in_size and out_size) passed to
+the MLP (<code class="docutils literal notranslate"><span class="pre">equinox.nn.MLP</span></code>). Ignored when <code class="docutils literal notranslate"><span class="pre">cond_dim</span></code> is None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.Planar.get_planar">
+<span class="sig-name descname"><span class="pre">get_planar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/planar.html#Planar.get_planar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Planar.get_planar" title="Link to this definition">#</a></dt>
+<dd><p>Get the planar bijection with the conditioning applied if conditional.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Power">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exponent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/power.html#Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Power" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Power transform <span class="math notranslate nohighlight">\(y = x^p\)</span>.</p>
+<p>Supports postive values, over which this is a bijection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exponent</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The exponent.</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The shape of the bijection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.RationalQuadraticSpline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RationalQuadraticSpline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">knots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_derivative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">softmax_adjust</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/rational_quadratic_spline.html#RationalQuadraticSpline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.RationalQuadraticSpline" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Scalar RationalQuadraticSpline transformation (<a class="reference external" href="https://arxiv.org/abs/1906.04032">https://arxiv.org/abs/1906.04032</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>knots</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of knots.</p></li>
+<li><p><strong>interval</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Interval to transform, if a scalar value, uses [-interval, interval],
+if a tuple, uses [interval[0], interval[1]]</p></li>
+<li><p><strong>min_derivative</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Minimum dervivative. Defaults to 1e-3.</p></li>
+<li><p><strong>softmax_adjust</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Controls minimum bin width and height by rescaling softmax
+output, e.g. 0=no adjustment, 1=average softmax output with evenly spaced
+widths, &gt;1 promotes more evenly spaced widths. See
+<code class="docutils literal notranslate"><span class="pre">real_to_increasing_on_interval</span></code>. Defaults to 1e-2.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="flowjax.bijections.RationalQuadraticSpline.derivative">
+<span class="sig-name descname"><span class="pre">derivative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/rational_quadratic_spline.html#RationalQuadraticSpline.derivative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.RationalQuadraticSpline.derivative" title="Link to this definition">#</a></dt>
+<dd><p>The derivative dy/dx of the forward transformation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Reshape">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Reshape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/utils.html#Reshape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Reshape" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Wraps bijection methods with reshaping operations.</p>
+<p>One use case for this is for bijections that do not directly support a scalar
+shape, but this allows construction with shape (1, ) and reshaping to ().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bijection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – The bijection to wrap.</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – The new input and output shape of the bijection. Defaults to
+unchanged.</p></li>
+<li><p><strong>cond_shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – The new cond_shape of the bijection. Defaults to unchanged.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flowjax.bijections</span> <span class="kn">import</span> <span class="n">Affine</span><span class="p">,</span> <span class="n">Reshape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span> <span class="o">=</span> <span class="n">Affine</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">(</span><span class="n">affine</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="go">Array([[0., 1.],</span>
+<span class="go">       [2., 3.]], dtype=float32)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Scale">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/affine.html#Scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Scale" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Scale transformation <span class="math notranslate nohighlight">\(y = a \cdot x\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scale</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLike</span></code></span>) – Scale parameter. Defaults to 1.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Scan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijection</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/jax_transforms.html#Scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Scan" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Repeatedly apply the same bijection with different parameter values.</p>
+<p>Internally, uses <cite>jax.lax.scan</cite> to reduce compilation time. Often it is convenient
+to construct these using <code class="docutils literal notranslate"><span class="pre">equinox.filter_vmap</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bijection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – A bijection, in which the arrays leaves have an additional leading
+axis to scan over. It is often can convenient to create compatible
+bijections with <code class="docutils literal notranslate"><span class="pre">equinox.filter_vmap</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Below is equivilent to <code class="docutils literal notranslate"><span class="pre">Chain([Affine(p)</span> <span class="pre">for</span> <span class="pre">p</span> <span class="pre">in</span> <span class="pre">params])</span></code>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flowjax.bijections</span> <span class="kn">import</span> <span class="n">Scan</span><span class="p">,</span> <span class="n">Affine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">equinox</span> <span class="k">as</span> <span class="nn">eqx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">filter_vmap</span><span class="p">(</span><span class="n">Affine</span><span class="p">)(</span><span class="n">params</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span> <span class="o">=</span> <span class="n">Scan</span><span class="p">(</span><span class="n">affine</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Sigmoid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/sigmoid.html#Sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Sigmoid" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Sigmoid bijection <span class="math notranslate nohighlight">\(y = \sigma(x) = \frac{1}{1 + \exp(-x)}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>]</span>) – The shape of the transform.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.SoftPlus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SoftPlus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/softplus.html#SoftPlus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.SoftPlus" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Transforms to positive domain using softplus <span class="math notranslate nohighlight">\(y = \log(1 + \exp(x))\)</span>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Stack">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/concatenate.html#Stack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Stack" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Stack bijections along a new axis (analagous to <code class="docutils literal notranslate"><span class="pre">jnp.stack</span></code>).</p>
+<p>See also <a class="reference internal" href="#flowjax.bijections.Concatenate" title="flowjax.bijections.Concatenate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concatenate</span></code></a>.</p>
+<p class="rubric">Example</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flowjax.bijections</span> <span class="kn">import</span> <span class="n">Stack</span><span class="p">,</span> <span class="n">Affine</span><span class="p">,</span> <span class="n">Exp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concat</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">([</span><span class="n">Affine</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="n">Exp</span><span class="p">((</span><span class="mi">3</span><span class="p">,))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concat</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bijections</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a>]</span>) – Bijections.</p></li>
+<li><p><strong>axis</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Axis along which to stack. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Tanh">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Tanh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/tanh.html#Tanh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Tanh" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Tanh bijection <span class="math notranslate nohighlight">\(y=\tanh(x)\)</span>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.TriangularAffine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TriangularAffine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/affine.html#TriangularAffine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.TriangularAffine" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>A triangular affine transformation.</p>
+<p>Transformation has the form <span class="math notranslate nohighlight">\(Ax + b\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is a lower or upper
+triangular matrix, and <span class="math notranslate nohighlight">\(b\)</span> is the bias vector. We assume the diagonal
+entries are positive, and constrain the values using softplus. Other
+parameterizations can be achieved by e.g. replacing <code class="docutils literal notranslate"><span class="pre">self.triangular</span></code>
+after construction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loc</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shaped[ArrayLike,</span> <span class="pre">'#dim']</span></code></span>) – Location parameter. If this is scalar, it is broadcast to the dimension
+inferred from arr.</p></li>
+<li><p><strong>arr</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shaped[Array,</span> <span class="pre">'dim</span> <span class="pre">dim']</span></code></span>) – Triangular matrix.</p></li>
+<li><p><strong>lower</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether the mask should select the lower or upper
+triangular matrix (other elements ignored). Defaults to True (lower).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flowjax.bijections.Vmap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Vmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bijection</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_axes_condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/flowjax/bijections/jax_transforms.html#Vmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flowjax.bijections.Vmap" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></p>
+<p>Applies vmap to bijection methods to add a batch dimension to the bijection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bijection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#flowjax.bijections.AbstractBijection" title="flowjax.bijections.bijection.AbstractBijection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a></span>) – The bijection to vectorize.</p></li>
+<li><p><strong>in_axes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTree</span></code> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Specify which axes of the bijection parameters to vectorise over. It
+should be a PyTree of <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code> with the tree structure being a
+prefix of the bijection, or a callable mapping <code class="docutils literal notranslate"><span class="pre">Leaf</span> <span class="pre">-&gt;</span> <span class="pre">Union[None,</span> <span class="pre">int]</span></code>.
+Note, if the bijection contains unwrappables, then in_axes should be
+specified for the unwrapped structure of the bijection. Defaults to None.</p></li>
+<li><p><strong>axis_size</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – The size of the new axis. This should be left unspecified if in_axes
+is provided, as the size can be inferred from the bijection parameters.
+Defaults to None.</p></li>
+<li><p><strong>in_axes_condition</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Optionally define an axis of the conditioning variable to
+vectorize over. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Add a bijection batch dimension, mapping over bijection parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">equinox</span> <span class="k">as</span> <span class="nn">eqx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flowjax.bijections</span> <span class="kn">import</span> <span class="n">Vmap</span><span class="p">,</span> <span class="n">RationalQuadraticSpline</span><span class="p">,</span> <span class="n">Affine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">filter_vmap</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="k">lambda</span><span class="p">:</span> <span class="n">RationalQuadraticSpline</span><span class="p">(</span><span class="n">knots</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>   <span class="n">axis_size</span><span class="o">=</span><span class="mi">10</span>
+<span class="gp">... </span><span class="p">)()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">Vmap</span><span class="p">(</span><span class="n">bijection</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="n">eqx</span><span class="o">.</span><span class="n">if_array</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(10,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Add a bijection batch dimension, broadcasting bijection parameters:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">RationalQuadraticSpline</span><span class="p">(</span><span class="n">knots</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">Vmap</span><span class="p">(</span><span class="n">bijection</span><span class="p">,</span> <span class="n">axis_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(10,)</span>
+</pre></div>
+</div>
+<p>A more advanced use case is to create bijections with more fine grained control
+over parameter broadcasting. For example, the <code class="docutils literal notranslate"><span class="pre">Affine</span></code> constructor broadcasts
+the location and scale parameters during initialization. What if we want an
+<code class="docutils literal notranslate"><span class="pre">Affine</span></code> bijection, with a global scale parameter, but an elementwise location
+parameter? We could achieve this as follows.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax.tree_util</span> <span class="kn">import</span> <span class="n">tree_map</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">paramax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">Affine</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(()),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(()))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">bij</span><span class="p">:</span> <span class="n">bij</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">bijection</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">in_axes</span> <span class="o">=</span> <span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">paramax</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">bijection</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">in_axes</span> <span class="o">=</span> <span class="n">eqx</span><span class="o">.</span><span class="n">tree_at</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="k">lambda</span> <span class="n">bij</span><span class="p">:</span> <span class="n">bij</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">in_axes</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">is_leaf</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span> <span class="o">=</span> <span class="n">Vmap</span><span class="p">(</span><span class="n">bijection</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="n">in_axes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span><span class="o">.</span><span class="n">bijection</span><span class="o">.</span><span class="n">loc</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">paramax</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">bijection</span><span class="o">.</span><span class="n">bijection</span><span class="o">.</span><span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bijection</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">Array([1., 2., 3.], dtype=float32)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="distributions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Distributions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="flows.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Flows</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection"><code class="docutils literal notranslate"><span class="pre">AbstractBijection</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.inverse"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.inverse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.inverse_and_log_det"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.inverse_and_log_det()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.transform"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.transform()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AbstractBijection.transform_and_log_det"><code class="docutils literal notranslate"><span class="pre">AbstractBijection.transform_and_log_det()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.AdditiveCondition"><code class="docutils literal notranslate"><span class="pre">AdditiveCondition</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Affine"><code class="docutils literal notranslate"><span class="pre">Affine</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.BlockAutoregressiveNetwork"><code class="docutils literal notranslate"><span class="pre">BlockAutoregressiveNetwork</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Chain"><code class="docutils literal notranslate"><span class="pre">Chain</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Chain.merge_chains"><code class="docutils literal notranslate"><span class="pre">Chain.merge_chains()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Concatenate"><code class="docutils literal notranslate"><span class="pre">Concatenate</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Coupling"><code class="docutils literal notranslate"><span class="pre">Coupling</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.EmbedCondition"><code class="docutils literal notranslate"><span class="pre">EmbedCondition</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Exp"><code class="docutils literal notranslate"><span class="pre">Exp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Flip"><code class="docutils literal notranslate"><span class="pre">Flip</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Identity"><code class="docutils literal notranslate"><span class="pre">Identity</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Indexed"><code class="docutils literal notranslate"><span class="pre">Indexed</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Invert"><code class="docutils literal notranslate"><span class="pre">Invert</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.LeakyTanh"><code class="docutils literal notranslate"><span class="pre">LeakyTanh</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Loc"><code class="docutils literal notranslate"><span class="pre">Loc</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.MaskedAutoregressive"><code class="docutils literal notranslate"><span class="pre">MaskedAutoregressive</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.MaskedAutoregressive.inv_scan_fn"><code class="docutils literal notranslate"><span class="pre">MaskedAutoregressive.inv_scan_fn()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.NumericalInverse"><code class="docutils literal notranslate"><span class="pre">NumericalInverse</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Permute"><code class="docutils literal notranslate"><span class="pre">Permute</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Planar"><code class="docutils literal notranslate"><span class="pre">Planar</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Planar.get_planar"><code class="docutils literal notranslate"><span class="pre">Planar.get_planar()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Power"><code class="docutils literal notranslate"><span class="pre">Power</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.RationalQuadraticSpline"><code class="docutils literal notranslate"><span class="pre">RationalQuadraticSpline</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.RationalQuadraticSpline.derivative"><code class="docutils literal notranslate"><span class="pre">RationalQuadraticSpline.derivative()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Reshape"><code class="docutils literal notranslate"><span class="pre">Reshape</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Scale"><code class="docutils literal notranslate"><span class="pre">Scale</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Scan"><code class="docutils literal notranslate"><span class="pre">Scan</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Sigmoid"><code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.SoftPlus"><code class="docutils literal notranslate"><span class="pre">SoftPlus</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Stack"><code class="docutils literal notranslate"><span class="pre">Stack</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Tanh"><code class="docutils literal notranslate"><span class="pre">Tanh</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.TriangularAffine"><code class="docutils literal notranslate"><span class="pre">TriangularAffine</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flowjax.bijections.Vmap"><code class="docutils literal notranslate"><span class="pre">Vmap</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Daniel Ward
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022, Daniel Ward.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

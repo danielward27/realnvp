@@ -1,0 +1,13 @@
+@import url("theme.css");
+
+/* Clearer distinction between each class. */
+dl.py.class {
+    border-left: 3px solid #008080;
+    padding: 10px;
+}
+
+/* Remove unnecessary scroll bar https://github.com/executablebooks/sphinx-book-theme/issues/732 */
+#rtd-footer-container {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
