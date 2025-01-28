@@ -16,20 +16,24 @@ from flowjax.bijections import (
     Chain,
     Concatenate,
     Coupling,
+    DCT,
     EmbedCondition,
     Exp,
     Flip,
+    Householder,
     Identity,
     Indexed,
     LeakyTanh,
     Loc,
     MaskedAutoregressive,
     NumericalInverse,
+    Neg,
     Permute,
     Planar,
     Power,
     RationalQuadraticSpline,
     Reshape,
+    Sandwich,
     Scale,
     Scan,
     Sigmoid,
@@ -132,6 +136,7 @@ bijections = {
             nn_depth=2,
         )
     ),
+    "Neg": lambda: Neg(shape=(DIM,)),
     "BlockAutoregressiveNetwork (unconditional)": lambda: BlockAutoregressiveNetwork(
         KEY,
         dim=DIM,
@@ -217,6 +222,12 @@ bijections = {
             partial(bisection_search, lower=-1, upper=1, atol=1e-7),
         ),
     ),
+    "Sandwich": lambda: Sandwich(
+        Exp(),
+        Affine(0.1, 0.5),
+    ),
+    "DCT": lambda: DCT(shape=(3, 4)),
+    "Householder": lambda: Householder(jnp.ones(3)),
 }
 
 

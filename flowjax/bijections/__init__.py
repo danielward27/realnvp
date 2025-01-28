@@ -24,7 +24,10 @@ from .utils import (
     NumericalInverse,
     Permute,
     Reshape,
+    Sandwich,
 )
+from .utils import EmbedCondition, Flip, Identity, Invert, Permute, Reshape, Sandwich
+from .orthogonal import Householder, DCT, Neg
 
 __all__ = [
     "AdditiveCondition",
@@ -34,20 +37,24 @@ __all__ = [
     "Chain",
     "Concatenate",
     "Coupling",
+    "DCT",
     "EmbedCondition",
     "Exp",
     "Flip",
+    "Householder",
     "Identity",
     "Invert",
     "LeakyTanh",
     "Loc",
     "MaskedAutoregressive",
     "Indexed",
+    "Neg",
     "Permute",
     "Power",
     "Planar",
     "RationalQuadraticSpline",
     "Reshape",
+    "Sandwich",
     "Scale",
     "Scan",
     "Sigmoid",

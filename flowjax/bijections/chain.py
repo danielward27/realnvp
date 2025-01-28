@@ -3,6 +3,8 @@
 from collections.abc import Sequence
 
 from paramax import AbstractUnwrappable, unwrap
+import jax.numpy as jnp
+from jax import Array
 
 from flowjax.bijections.bijection import AbstractBijection
 from flowjax.utils import check_shapes_match, merge_cond_shapes
@@ -36,15 +38,19 @@ class Chain(AbstractBijection):
         self.cond_shape = merge_cond_shapes([unwrap(b).cond_shape for b in unwrapped])
         self.bijections = tuple(bijections)
 
-    def transform_and_log_det(self, x, condition=None):
-        log_abs_det_jac = 0
+    def transform_and_log_det(
+        self, x: Array, condition: Array | None = None
+    ) -> tuple[Array, Array]:
+        log_abs_det_jac = jnp.zeros(())
         for bijection in self.bijections:
             x, log_abs_det_jac_i = bijection.transform_and_log_det(x, condition)
             log_abs_det_jac += log_abs_det_jac_i.sum()
         return x, log_abs_det_jac
 
-    def inverse_and_log_det(self, y, condition=None):
-        log_abs_det_jac = 0
+    def inverse_and_log_det(
+        self, y: Array, condition: Array | None = None
+    ) -> tuple[Array, Array]:
+        log_abs_det_jac = jnp.zeros(())
         for bijection in reversed(self.bijections):
             y, log_abs_det_jac_i = bijection.inverse_and_log_det(y, condition)
             log_abs_det_jac += log_abs_det_jac_i.sum()
