@@ -7,11 +7,14 @@ import jax
 import jax.numpy as jnp
 import jax.random as jr
 import pytest
+import numpy as np
+from scipy import stats
 
 from flowjax.bijections import (
     AbstractBijection,
     AdditiveCondition,
     Affine,
+    AsymmetricAffine,
     BlockAutoregressiveNetwork,
     Chain,
     Concatenate,
@@ -93,6 +96,11 @@ bijections = {
             jnp.diag(jnp.ones(3)),
         ),
         jnp.diag(jnp.array([-1, 2, -3])),
+    ),
+    "AsymmetricAffine": lambda: AsymmetricAffine(
+        jnp.ones(DIM),
+        jnp.full(DIM, 2.6),
+        jnp.full(DIM, 0.1),
     ),
     "RationalQuadraticSpline": lambda: RationalQuadraticSpline(knots=4, interval=1),
     "Coupling (unconditional)": lambda: Coupling(

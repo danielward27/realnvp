@@ -13,7 +13,7 @@ from .planar import Planar
 from .power import Power
 from .rational_quadratic_spline import RationalQuadraticSpline
 from .sigmoid import Sigmoid
-from .softplus import SoftPlus
+from .softplus import SoftPlus, AsymmetricAffine
 from .tanh import LeakyTanh, Tanh
 from .utils import (
     EmbedCondition,
@@ -33,6 +33,7 @@ __all__ = [
     "AdditiveCondition",
     "Affine",
     "AbstractBijection",
+    "AsymmetricAffine",
     "BlockAutoregressiveNetwork",
     "Chain",
     "Concatenate",

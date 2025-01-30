@@ -307,18 +307,24 @@ class NumericalInverse(AbstractBijection):
 
 
 class Sandwich(AbstractBijection):
-    """
-    A bijection that sandwiches one transformation inside another.
+    """A bijection that composes bijections in a nested structure: g⁻¹ ∘ f ∘ g.
 
-    The `Sandwich` bijection applies an "outer" transformation, followed by an
-    "inner" transformation, and then the inverse of the "outer" transformation.
-    This allows for the composition of transformations in a nested structure.
+    The Sandwich bijection creates a new transformation by "sandwiching" one
+    bijection between the forward and inverse applications of another. Given
+    bijections f and g, it computes:
+        Forward:  x → g⁻¹(f(g(x)))
+        Inverse:  y → g⁻¹(f⁻¹(g(y)))
 
-    Args:
-        outer (AbstractBijection): The outer transformation applied first and
-            inverted last.
-        inner (AbstractBijection): The inner transformation applied between
-            the forward and inverse outer transformations.
+    This composition pattern is useful for:
+    - Creating symmetries in the transformation
+    - Applying a transformation in a different coordinate system
+    - Building more complex bijections from simpler ones
+
+    Attributes:
+        shape: Shape of the input/output arrays
+        cond_shape: Shape of conditional inputs
+        outer: Transformation g applied first and inverted last
+        inner: Transformation f applied in the middle
     """
     shape: tuple[int, ...]
     cond_shape: tuple[int, ...] | None

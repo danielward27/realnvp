@@ -8,6 +8,7 @@ from collections.abc import Callable
 import equinox as eqx
 import jax.nn as jnn
 import jax.numpy as jnp
+import jax
 import paramax
 from jaxtyping import PRNGKeyArray
 
