@@ -79,10 +79,10 @@ class Permute(AbstractBijection):
         )
 
     def transform_and_log_det(self, x, condition=None):
-        return x[self.permutation], jnp.array(0)
+        return x[self.permutation], jnp.array(0.0)
 
     def inverse_and_log_det(self, y, condition=None):
-        return y[self.inverse_permutation], jnp.array(0)
+        return y[self.inverse_permutation], jnp.array(0.0)
 
 
 class Flip(AbstractBijection):
@@ -95,11 +95,15 @@ class Flip(AbstractBijection):
     shape: tuple[int, ...] = ()
     cond_shape: ClassVar[None] = None
 
-    def transform_and_log_det(self, x, condition=None):
-        return jnp.flip(x), jnp.array(0)
+    def transform_and_log_det(
+        self, x: Array, condition: Array | None = None
+    ) -> tuple[Array, Array]:
+        return jnp.flip(x), jnp.zeros(())
 
-    def inverse_and_log_det(self, y, condition=None):
-        return jnp.flip(y), jnp.array(0)
+    def inverse_and_log_det(
+        self, y: Array, condition: Array | None = None
+    ) -> tuple[Array, Array]:
+        return jnp.flip(y), jnp.zeros(())
 
 
 class Indexed(AbstractBijection):
@@ -300,3 +304,54 @@ class NumericalInverse(AbstractBijection):
         x = self.inverter(self.bijection, y, condition)
         _, log_det = self.bijection.transform_and_log_det(x, condition)
         return x, log_det
+
+
+class Sandwich(AbstractBijection):
+    """A bijection that composes bijections in a nested structure: g⁻¹ ∘ f ∘ g.
+
+    The Sandwich bijection creates a new transformation by "sandwiching" one
+    bijection between the forward and inverse applications of another. Given
+    bijections f and g, it computes:
+        Forward:  x → g⁻¹(f(g(x)))
+        Inverse:  y → g⁻¹(f⁻¹(g(y)))
+
+    This composition pattern is useful for:
+    - Creating symmetries in the transformation
+    - Applying a transformation in a different coordinate system
+    - Building more complex bijections from simpler ones
+
+    Attributes:
+        shape: Shape of the input/output arrays
+        cond_shape: Shape of conditional inputs
+        outer: Transformation g applied first and inverted last
+        inner: Transformation f applied in the middle
+    """
+    shape: tuple[int, ...]
+    cond_shape: tuple[int, ...] | None
+    outer: AbstractBijection
+    inner: AbstractBijection
+
+    def __init__(self, outer: AbstractBijection, inner: AbstractBijection):
+        shape = inner.shape
+        if outer.shape != shape:
+            raise ValueError("Inner and outer transformations are incompatible")
+        self.cond_shape = inner.cond_shape
+        if outer.cond_shape != self.cond_shape:
+            raise ValueError("Inner and outer transformations are incompatible")
+        self.shape = shape
+        self.outer = outer
+        self.inner = inner
+
+    def transform_and_log_det(self, x: Array, condition=None) -> tuple[Array, Array]:
+        z1, logdet1 = self.outer.transform_and_log_det(x, condition)
+        z2, logdet2 = self.inner.transform_and_log_det(z1, condition)
+        y, logdet3 = self.outer.inverse_and_log_det(z2, condition)
+
+        return y, logdet1 + logdet2 + logdet3
+
+    def inverse_and_log_det(self, y: Array, condition=None) -> tuple[Array, Array]:
+        z1, logdet1 = self.outer.transform_and_log_det(y, condition)
+        z2, logdet2 = self.inner.inverse_and_log_det(z1, condition)
+        x, logdet3 = self.outer.inverse_and_log_det(z2, condition)
+
+        return x, logdet1 + logdet2 + logdet3

@@ -7,29 +7,36 @@ import jax
 import jax.numpy as jnp
 import jax.random as jr
 import pytest
+import numpy as np
+from scipy import stats
 
 from flowjax.bijections import (
     AbstractBijection,
     AdditiveCondition,
     Affine,
+    AsymmetricAffine,
     BlockAutoregressiveNetwork,
     Chain,
     Concatenate,
     Coupling,
+    DCT,
     EmbedCondition,
     Exp,
     Flip,
+    Householder,
     Identity,
     Indexed,
     LeakyTanh,
     Loc,
     MaskedAutoregressive,
     NumericalInverse,
+    Neg,
     Permute,
     Planar,
     Power,
     RationalQuadraticSpline,
     Reshape,
+    Sandwich,
     Scale,
     Scan,
     Sigmoid,
@@ -90,6 +97,11 @@ bijections = {
         ),
         jnp.diag(jnp.array([-1, 2, -3])),
     ),
+    "AsymmetricAffine": lambda: AsymmetricAffine(
+        jnp.ones(DIM),
+        jnp.full(DIM, 2.6),
+        jnp.full(DIM, 0.1),
+    ),
     "RationalQuadraticSpline": lambda: RationalQuadraticSpline(knots=4, interval=1),
     "Coupling (unconditional)": lambda: Coupling(
         KEY,
@@ -132,6 +144,7 @@ bijections = {
             nn_depth=2,
         )
     ),
+    "Neg": lambda: Neg(shape=(DIM,)),
     "BlockAutoregressiveNetwork (unconditional)": lambda: BlockAutoregressiveNetwork(
         KEY,
         dim=DIM,
@@ -217,6 +230,12 @@ bijections = {
             partial(bisection_search, lower=-1, upper=1, atol=1e-7),
         ),
     ),
+    "Sandwich": lambda: Sandwich(
+        Exp(),
+        Affine(0.1, 0.5),
+    ),
+    "DCT": lambda: DCT(shape=(3, 4)),
+    "Householder": lambda: Householder(jnp.ones(3)),
 }
 
 

@@ -200,7 +200,7 @@ class AdditiveCondition(AbstractBijection):
         self.cond_shape = cond_shape
 
     def transform_and_log_det(self, x, condition=None):
-        return x + self.module(condition), jnp.array(0)
+        return x + self.module(condition), jnp.zeros(())
 
     def inverse_and_log_det(self, y, condition=None):
-        return y - self.module(condition), jnp.array(0)
+        return y - self.module(condition), jnp.zeros(())

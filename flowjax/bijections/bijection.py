@@ -15,6 +15,7 @@ import jax.numpy as jnp
 from equinox import AbstractVar
 from jaxtyping import Array, ArrayLike
 from paramax import unwrap
+import jax
 
 from flowjax.utils import _get_ufunc_signature, arraylike_to_array
 
